@@ -5,16 +5,28 @@ import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
 
-export const signUp = (name, email, password) => {
+export const signUp = (email, password, name, country, city, phone, image) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
+    // name: "twra",
+    //     email: "na",
+    //     phone: 77455221,
+    //     password: "na",
+    //     country: "dw",
+    //     city: "pws",
+    //     image: "thaPaei",
+    //     isAdmin: false,
     try {
       const response = await axios.post(`${apiUrl}/auth/signup`, {
-        name,
         email,
         password,
+        name,
+        country,
+        city,
+        phone,
+        image,
+        isAdmin: false,
       });
-
       dispatch(
         loginSuccess({ token: response.data.token, user: response.data.user })
       );
