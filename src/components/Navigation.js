@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/user/selectors";
 import { logOut } from "../store/user/slice";
 import { Link } from "react-router-dom";
+import { logo } from "../assets";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -14,15 +15,18 @@ export const Navigation = () => {
 
   return (
     <Nav>
-      <Logo href="/">Title</Logo>
+      <Logo href="/">
+        <Img src={logo} alt="Aleksandria"></Img>
+      </Logo>
       <Hamburger onClick={() => setOpen(!open)}>
         <span />
         <span />
         <span />
       </Hamburger>
       <Menu open={open}>
-        <MenuLink to="/empty1">Empty 1</MenuLink>
-        <MenuLink to="/empty2">Empty 2</MenuLink>
+        <MenuLink to="/empty1">Apartments</MenuLink>
+        <MenuLink to="/empty2">Discover</MenuLink>
+        <MenuLink to="/empty2">About us</MenuLink>
         {token ? (
           <button onClick={() => dispatch(logOut())}>Logout</button>
         ) : (
@@ -38,11 +42,11 @@ const MenuLink = styled(Link)`
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: #ececec;
+  color: #000;
   transition: all 0.3s ease-in;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   &:hover {
-    color: #9cc094;
+    color: #784e2c;
   }
 `;
 
@@ -52,7 +56,7 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: #000;
+  background: transparent;
   /* position: absolute; */
   top: 0;
   left: 0;
@@ -60,14 +64,20 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.a`
-  padding: 1rem 0;
-  color: #ececec;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 1.7rem;
-  span {
-    font-weight: 300;
-    font-size: 1.3rem;
+  width: 100px;
+  height: 120px;
+  @media (max-width: 780px) {
+    width: 50px;
+    height: 70px;
+  }
+`;
+
+const Img = styled.img`
+  width: 100px;
+  height: 120px;
+  @media (max-width: 780px) {
+    width: 50px;
+    height: 70px;
   }
 `;
 
@@ -78,7 +88,7 @@ const Hamburger = styled.div`
   span {
     height: 2px;
     width: 25px;
-    background-color: #ececec;
+    background-color: #000;
     margin-bottom: 4px;
     border-radius: 5px;
   }
