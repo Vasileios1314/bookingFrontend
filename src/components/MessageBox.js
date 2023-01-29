@@ -23,6 +23,8 @@ export const MessageBox = () => {
 };
 
 const MessageContainer = styled.div`
+  z-index: 10;
+  position: relative;
   display: flex;
   justify-content: space-between;
   background-color: ${(props) =>
@@ -38,4 +40,5 @@ const Text = styled.p`
   font-weight: bold;
   margin-top: 0px;
   padding: 15px;
+  z-index: 10;
 `;

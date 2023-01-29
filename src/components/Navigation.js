@@ -1,10 +1,17 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { selectToken } from "../store/user/selectors";
 import { logOut } from "../store/user/slice";
 import { Link } from "react-router-dom";
 import { logo } from "../assets";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faTimes } from "@fortawesome/free-brands-svg-icons";
+import {
+  faTimes,
+  faSignOut,
+  faSignIn,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -18,19 +25,31 @@ export const Navigation = () => {
       <Logo href="/">
         <Img src={logo} alt="Aleksandria"></Img>
       </Logo>
-      <Hamburger onClick={() => setOpen(!open)}>
-        <span />
-        <span />
-        <span />
-      </Hamburger>
+      {!open ? (
+        <Hamburger onClick={() => setOpen(!open)}>
+          <span />
+          <span />
+          <span />
+        </Hamburger>
+      ) : (
+        <Hamburger onClick={() => setOpen(!open)}>
+          <FontAwesomeIcon icon={faTimes} />
+        </Hamburger>
+      )}
       <Menu open={open}>
         <MenuLink to="/empty1">Apartments</MenuLink>
         <MenuLink to="/empty2">Discover</MenuLink>
         <MenuLink to="/empty2">About us</MenuLink>
         {token ? (
-          <button onClick={() => dispatch(logOut())}>Logout</button>
+          <button onClick={() => dispatch(logOut())}>
+            <FontAwesomeIcon icon={faSignOut} />
+            Logout
+          </button>
         ) : (
-          <MenuLink to="/login">Login</MenuLink>
+          <MenuLink to="/login">
+            <FontAwesomeIcon icon={faSignIn} />
+            Login
+          </MenuLink>
         )}
       </Menu>
     </Nav>
@@ -38,6 +57,8 @@ export const Navigation = () => {
 };
 
 const MenuLink = styled(Link)`
+  z-index: 10;
+
   padding: 1rem 2rem;
   cursor: pointer;
   text-align: center;
@@ -46,24 +67,27 @@ const MenuLink = styled(Link)`
   transition: all 0.3s ease-in;
   font-size: 1.2rem;
   &:hover {
-    color: #784e2c;
+    color: #bd2323;
   }
 `;
 
 const Nav = styled.div`
+  z-index: 10;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: transparent;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   /* position: absolute; */
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
 `;
 
 const Logo = styled.a`
+  z-index: 10;
   width: 100px;
   height: 120px;
   @media (max-width: 780px) {
@@ -73,6 +97,7 @@ const Logo = styled.a`
 `;
 
 const Img = styled.img`
+  z-index: 10;
   width: 100px;
   height: 120px;
   @media (max-width: 780px) {
@@ -82,6 +107,7 @@ const Img = styled.img`
 `;
 
 const Hamburger = styled.div`
+  z-index: 10;
   display: none;
   flex-direction: column;
   cursor: pointer;
@@ -98,6 +124,7 @@ const Hamburger = styled.div`
 `;
 
 const Menu = styled.div`
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
