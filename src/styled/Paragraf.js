@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
-export const Title = styled.h1`
+export const Paragraf = styled.p`
   text-align: center;
-  margin-top: 30px;
   color: #fff;
-  font-size: 1.5em;
+  font-size: 0.8em;
   font-weight: bold;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   font-family: "Ubuntu", Arial, sans-serif;
-  text-transform: uppercase;
 `;

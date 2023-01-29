@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {
-  carouselImg3,
-  carouselImg16,
-  carouselImg12,
-  carouselImg17,
+  carouselImg2,
+  carouselImg4,
+  carouselImg7,
+  carouselImg10,
 } from "../assets";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 
-export function CarouselPlaces() {
+export function CarouselPlaces2() {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -21,10 +21,23 @@ export function CarouselPlaces() {
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           alignItems: "center",
         }}
       >
+        <div
+          style={{
+            paddingLeft: "20px",
+          }}
+        >
+          <h4>Summer At The Mountains of Albania: Just Do It</h4>
+          <p>
+            Discover the summer magic of Albania's mountain ranges. Enjoy scenic
+            hikes, fresh air, and breathtaking views. Immerse yourself in nature
+            and rejuvenate your spirit. A summer vacation in the mountains is a
+            unique experience not to be missed.
+          </p>
+        </div>
         <Carousel
           keyboard
           touch
@@ -36,7 +49,7 @@ export function CarouselPlaces() {
           <Carousel.Item width="600px" height="600px">
             <img
               className="d-block "
-              src={carouselImg3}
+              src={carouselImg2}
               alt="First slide"
               width="600px"
               height="600px"
@@ -49,7 +62,7 @@ export function CarouselPlaces() {
           <Carousel.Item width="600px" height="600px">
             <img
               className="d-block "
-              src={carouselImg16}
+              src={carouselImg4}
               alt="Second slide"
               width="600px"
               height="600px"
@@ -62,7 +75,7 @@ export function CarouselPlaces() {
           <Carousel.Item width="600px" height="600px">
             <img
               className="d-block "
-              src={carouselImg12}
+              src={carouselImg7}
               alt="Durres"
               width="600px"
               height="600px"
@@ -75,7 +88,7 @@ export function CarouselPlaces() {
           <Carousel.Item width="600px" height="600px">
             <img
               className="d-block "
-              src={carouselImg17}
+              src={carouselImg10}
               alt="Second slide"
               width="600px"
               height="600px"
@@ -86,28 +99,14 @@ export function CarouselPlaces() {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-        <div
-          style={{
-            paddingLeft: "20px",
-          }}
-        >
-          <h4>Summer in Albania: A Mesmerizing Experience</h4>
-          <p>
-            Summer in Albania is a wonderful experience. The country's beautiful
-            beaches, warm climate, and vibrant atmosphere make it a popular
-            tourist destination. The turquoise waters and stunning scenery are
-            sure to leave you in awe. Whether you want to relax or engage in
-            water activities, there's something for everyone in Albania. Come
-            and discover its hidden gems for a summer vacation you'll never
-            forget!
-          </p>
-        </div>
       </div>
     </Container>
   );
 }
 
 const Container = styled.div`
+  margin-left: auto;
+  margin-top: 40px;
   max-height: 90vh;
   max-width: 50%;
   display: flex;

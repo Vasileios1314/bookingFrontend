@@ -58,7 +58,6 @@ export const Navigation = () => {
 
 const MenuLink = styled(Link)`
   z-index: 10;
-
   padding: 1rem 2rem;
   cursor: pointer;
   text-align: center;

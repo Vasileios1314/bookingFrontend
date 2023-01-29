@@ -1,7 +1,7 @@
 import { Title } from "../styled";
 import { Link } from "react-router-dom";
 import { LinkWord } from "../styled";
-import { Hero, CarouselPlaces } from "../components";
+import { Hero, CarouselPlaces, CarouselPlaces2 } from "../components";
 import styled from "styled-components";
 
 export const Homepage = () => {
@@ -13,6 +13,7 @@ export const Homepage = () => {
       <LinkWord /> */}
       <Hero />
       <CarouselPlaces />
+      <CarouselPlaces2 />
     </Container>
   );
 };

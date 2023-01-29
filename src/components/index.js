@@ -6,3 +6,4 @@ export * from "./Button";
 export * from "./Billing";
 export * from "./Footer";
 export * from "./ApartmentCard";
+export * from "./CarouselPlaces2";

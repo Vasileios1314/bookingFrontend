@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getUserWithStoredToken } from "./store/user/thunks";
 import { Routes, Route } from "react-router-dom";
-import { Navigation, MessageBox } from "./components";
+import { Navigation, MessageBox, Footer } from "./components";
 import { Homepage, Login, SignUp } from "./pages";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -1,11 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import { hero } from "../assets";
+import { Title, Paragraf, ButtonLink } from "../styled";
+import { Link } from "react-router-dom";
 
 export function Hero() {
   return (
     <Container>
-      <HeroSection>Hero</HeroSection>
+      <HeroSection>
+        <InnerContainer>
+          <Title>
+            "Experience the Ultimate Comfort at Vlorë's Premier Apartments
+            Hotel"
+          </Title>
+          <Paragraf>
+            Luxurious amenities, spacious rooms, and breathtaking views await
+            you in this prime location. Discover the epitome of comfort and
+            relaxation in Vlorë, Albania.
+          </Paragraf>
+          <Link to={`/apartments`}></Link>
+          <ButtonLink href="/apartments">Book An Apartment</ButtonLink>
+        </InnerContainer>
+      </HeroSection>
     </Container>
   );
 }
@@ -13,6 +29,15 @@ export function Hero() {
 const Container = styled.div`
   height: 90vh;
 `;
+
+const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 80%;
+  max-height: 80%;
+`;
+
 const HeroSection = styled.section`
   z-index: 1;
   width: 100%;
