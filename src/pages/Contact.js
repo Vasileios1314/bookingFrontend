@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { googleMapsApiUrl } from "../config/constants";
 import styled from "styled-components";
 import {
   faMapMarker,
@@ -8,14 +7,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal, Button } from "react-bootstrap";
-// import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
 export function Contact({ onRouteChange }) {
   const [copied, setCopied] = useState(false);
   const [show, setShow] = useState(false);
+  const [fullscreen, setFullscreen] = useState(true);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  function handleShow(breakpoint) {
+    setFullscreen(breakpoint);
+    setShow(true);
+  }
 
   const handleCopy = () => {
     navigator.clipboard.writeText("+355 123 456 789");
@@ -24,29 +27,6 @@ export function Contact({ onRouteChange }) {
       setCopied(false);
     }, 3000);
   };
-  // const MapModal = () => (
-  //   <Modal show={showMapModal} onHide={() => setShowMapModal(false)}>
-  //     <Modal.Header closeButton>
-  //       <Modal.Title>Location of the Hotel</Modal.Title>
-  //     </Modal.Header>
-  //     <Modal.Body>
-  //       <div style={{ height: "400px", width: "100%" }}>
-  //         <GoogleMapReact
-  //           bootstrapURLKeys={{
-  //             key: "YOUR_GOOGLE_MAP_API_KEY",
-  //           }}
-  //           defaultCenter={{
-  //             lat: 41.327961,
-  //             lng: 19.819098,
-  //           }}
-  //           defaultZoom={15}
-  //         >
-  //           <Marker lat={41.327961} lng={19.819098} text="Hotel Location" />
-  //         </GoogleMapReact>
-  //       </div>
-  //     </Modal.Body>
-  //   </Modal>
-  // );
 
   useEffect(() => {
     onRouteChange(false);
@@ -85,7 +65,7 @@ export function Contact({ onRouteChange }) {
     font-size: 2.5rem;
     font-weight: bold;
     color: #000;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   `;
 
   const InfoContainer = styled.div`
@@ -93,9 +73,11 @@ export function Contact({ onRouteChange }) {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
+    margin-top: 10rem;
 
     @media (max-width: 800px) {
       flex-direction: column;
+      margin-top: 0;
     }
   `;
 
@@ -143,18 +125,19 @@ export function Contact({ onRouteChange }) {
         </InfoBlock>
       </InfoContainer>
       <Text>Our hotel is open 24/7 and always ready to serve you.</Text>
-      <Modal show={show} onHide={handleClose}>
+      <Modal size="xl" fullscreen={fullscreen} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Location of the Hotel</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* <Map
-            // google={props.google}
-            zoom={15}
-            initialCenter={{ lat: 41.3275, lng: 19.8187 }}
-          >
-            <Marker position={{ lat: 41.3275, lng: 19.8187 }} />
-          </Map> */}
+          <iframe
+            title="GoogleMap"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3114.7990994176034!2d19.489515990109776!3d40.45881853339447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134533c22ce3deaf%3A0xe7dc304baa7841ee!2sAuto%20Service%20Spiropali!5e1!3m2!1sen!2snl!4v1675543227466!5m2!1sen!2snl"
+            style={{ border: "0", width: "100%", height: "100%" }}
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -164,15 +147,4 @@ export function Contact({ onRouteChange }) {
       </Modal>
     </ContactContainer>
   );
-}
-{
-  /* <Icon>
-            <FontAwesomeIcon icon={faClock} />
-          </Icon>
-           <Icon>
-           <FontAwesomeIcon icon={faPhone} />
-         </Icon>
-          <Icon>
-          <FontAwesomeIcon icon={faMapMarker} />
-        </Icon> */
 }
