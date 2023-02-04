@@ -27,6 +27,12 @@ const SocialIcons = styled.div`
   & > * {
     margin: 0 10px;
     font-size: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  & > *:hover {
+    transform: scale(1.2);
+    cursor: pointer;
   }
 `;
 
@@ -37,6 +43,12 @@ const Links = styled.div`
   & > a {
     color: #fff;
     margin: 0 20px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  & > a:hover {
+    color: lightblue;
+    cursor: pointer;
   }
 `;
 
@@ -48,9 +60,6 @@ export function Footer() {
   return (
     <FooterContainer>
       <SocialIcons>
-        {/* <FaFacebook />
-        <FaTwitter />
-        <FaInstagram /> */}
         <FontAwesomeIcon icon={faFacebook} />
         <FontAwesomeIcon icon={faAirbnb} />
         <FontAwesomeIcon icon={faInstagram} />

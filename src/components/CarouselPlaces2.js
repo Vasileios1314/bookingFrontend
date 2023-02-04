@@ -18,35 +18,26 @@ export function CarouselPlaces2() {
 
   return (
     <Container>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            paddingLeft: "20px",
-          }}
-        >
-          <h4>Summer At The Mountains of Albania: Just Do It</h4>
-          <p>
-            Discover the summer magic of Albania's mountain ranges. Enjoy scenic
-            hikes, fresh air, and breathtaking views. Immerse yourself in nature
-            and rejuvenate your spirit. A summer vacation in the mountains is a
-            unique experience not to be missed.
-          </p>
-        </div>
+      <TextContainer>
+        <h4>Summer At The Mountains of Albania: Just Do It</h4>
+        <p>
+          Discover the summer magic of Albania's mountain ranges. Enjoy scenic
+          hikes, fresh air, and breathtaking views. Immerse yourself in nature
+          and rejuvenate your spirit. A summer vacation in the mountains is a
+          unique experience not to be missed.
+        </p>
+      </TextContainer>
+      <CarouselContainer>
         <Carousel
           keyboard
           touch
           wrap
           activeIndex={index}
           onSelect={handleSelect}
-          style={{ width: "100%" }}
+          controls={false}
+          indicators={false}
         >
-          <Carousel.Item width="600px" height="600px">
+          <Carousel.Item>
             <img
               className="d-block "
               src={carouselImg2}
@@ -54,12 +45,8 @@ export function CarouselPlaces2() {
               width="600px"
               height="600px"
             />
-            <Carousel.Caption>
-              <h3>Summer Taste</h3>
-              <p>Find the ideal place for you and your partner or family</p>
-            </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item width="600px" height="600px">
+          <Carousel.Item>
             <img
               className="d-block "
               src={carouselImg4}
@@ -67,12 +54,8 @@ export function CarouselPlaces2() {
               width="600px"
               height="600px"
             />
-            <Carousel.Caption>
-              <h3>Summer Taste</h3>
-              <p>Find the ideal place for you and your partner or family</p>
-            </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item width="600px" height="600px">
+          <Carousel.Item>
             <img
               className="d-block "
               src={carouselImg7}
@@ -80,12 +63,8 @@ export function CarouselPlaces2() {
               width="600px"
               height="600px"
             />
-            <Carousel.Caption>
-              <h3>Summer Taste</h3>
-              <p>Find the ideal place for you and your partner or family</p>
-            </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item width="600px" height="600px">
+          <Carousel.Item>
             <img
               className="d-block "
               src={carouselImg10}
@@ -93,13 +72,9 @@ export function CarouselPlaces2() {
               width="600px"
               height="600px"
             />
-            <Carousel.Caption>
-              <h3>Summer Taste</h3>
-              <p>Find the ideal place for you and your partner or family</p>
-            </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-      </div>
+      </CarouselContainer>
     </Container>
   );
 }
@@ -107,11 +82,41 @@ export function CarouselPlaces2() {
 const Container = styled.div`
   margin-left: auto;
   margin-top: 40px;
-  max-height: 90vh;
-  max-width: 50%;
   display: flex;
   align-items: center;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     flex-direction: column;
+  }
+`;
+
+const CarouselContainer = styled.div`
+  width: 50%;
+  max-height: 50%;
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 800px) {
+    order: 1;
+    width: 100vw;
+  }
+`;
+
+const TextContainer = styled.div`
+  padding: 20px;
+  max-width: 50%;
+  max-height: 50%;
+  h4 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+  @media (min-width: 800px) {
+    max-width: initial;
+    width: 50%;
+  }
+  @media (max-width: 800px) {
+    order: 2;
+    width: 100%;
+    max-width: initial;
   }
 `;

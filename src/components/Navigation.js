@@ -6,7 +6,6 @@ import { logOut } from "../store/user/slice";
 import { Link } from "react-router-dom";
 import { logo } from "../assets";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faTimes } from "@fortawesome/free-brands-svg-icons";
 import {
   faTimes,
   faSignOut,
@@ -41,10 +40,10 @@ export const Navigation = () => {
         <MenuLink to="/empty2">Discover</MenuLink>
         <MenuLink to="/empty2">About us</MenuLink>
         {token ? (
-          <button onClick={() => dispatch(logOut())}>
+          <MenuLink as="div" onClick={() => dispatch(logOut())}>
             <FontAwesomeIcon icon={faSignOut} />
             Logout
-          </button>
+          </MenuLink>
         ) : (
           <MenuLink to="/login">
             <FontAwesomeIcon icon={faSignIn} />

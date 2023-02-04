@@ -53,7 +53,7 @@ const HeroSection = styled.section`
   justify-content: center;
   color: #fff;
   border-radius: 3px;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
