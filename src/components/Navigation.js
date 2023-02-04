@@ -36,9 +36,9 @@ export const Navigation = () => {
         </Hamburger>
       )}
       <Menu open={open}>
-        <MenuLink to="/empty1">Apartments</MenuLink>
-        <MenuLink to="/empty2">Discover</MenuLink>
-        <MenuLink to="/empty2">About us</MenuLink>
+        <MenuLink to={"/apartments"}>Apartments</MenuLink>
+        <MenuLink to={"/discover"}>Discover</MenuLink>
+        <MenuLink to={"/about"}>About us</MenuLink>
         {token ? (
           <MenuLink as="div" onClick={() => dispatch(logOut())}>
             <FontAwesomeIcon icon={faSignOut} />
@@ -62,8 +62,8 @@ const MenuLink = styled(Link)`
   text-align: center;
   text-decoration: none;
   color: #000;
-  transition: all 0.3s ease-in;
-  font-size: 1.2rem;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.4rem;
   &:hover {
     color: #bd2323;
   }
@@ -79,7 +79,6 @@ const Nav = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  /* position: absolute; */
   position: sticky;
   top: 0;
 `;

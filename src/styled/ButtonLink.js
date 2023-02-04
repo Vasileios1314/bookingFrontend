@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ButtonLink = styled.button`
   font-family: "Ubuntu", sans-serif;
-  width: 20.5rem;
+  width: 18.5rem;
   height: 3.5rem;
   background: ${(props) => (props.primary ? "#fff" : "transparent")};
   color: ${(props) => (props.primary ? "white" : "#fff")};

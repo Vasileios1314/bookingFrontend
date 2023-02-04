@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
-export function Booking() {
+export function Booking({ onRouteChange }) {
+  useEffect(() => {
+    onRouteChange(false);
+  }, []);
+  console.log("homePage", onRouteChange);
   return <div>Booking</div>;
 }

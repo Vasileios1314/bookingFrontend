@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../store/user/thunks";
 import { selectToken } from "../store/user/selectors";
 
-export const Login = () => {
+export const Login = ({ onRouteChange }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +15,10 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const token = useSelector(selectToken);
+  useEffect(() => {
+    onRouteChange(false);
+  }, []);
+  console.log("homePage", onRouteChange);
 
   useEffect(() => {
     if (token !== null) {

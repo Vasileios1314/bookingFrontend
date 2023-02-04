@@ -1,15 +1,13 @@
 import React, { useState } from "react";
+import { ButtonLink2 } from "../styled";
 import styled from "styled-components";
-import {
-  carouselImg3,
-  carouselImg16,
-  carouselImg12,
-  carouselImg17,
-} from "../assets";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
+import { v4 as uuidv4 } from "uuid";
 
-export function CarouselPlaces() {
+const id = uuidv4();
+
+export function CarouselPlaces(props) {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -17,7 +15,7 @@ export function CarouselPlaces() {
   };
 
   return (
-    <Container>
+    <Container key={id}>
       <CarouselContainer>
         <Carousel
           keyboard
@@ -28,54 +26,29 @@ export function CarouselPlaces() {
           controls={false}
           indicators={false}
         >
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg3}
-              alt="First slide"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg16}
-              alt="Second slide"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg12}
-              alt="Durres"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg17}
-              alt="Second slide"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
+          {props.fotos.map((foto) => {
+            return (
+              <Carousel.Item key={uuidv4()}>
+                <img
+                  className="d-block "
+                  src={foto}
+                  alt="First slide"
+                  width="600px"
+                  height="600px"
+                />
+              </Carousel.Item>
+            );
+          })}
         </Carousel>
       </CarouselContainer>
       <TextContainer>
-        <h4>Summer in Albania: A Mesmerizing Experience</h4>
-        <p>
-          Summer in Albania is a wonderful experience. The country's beautiful
-          beaches, warm climate, and vibrant atmosphere make it a popular
-          tourist destination. The turquoise waters and stunning scenery are
-          sure to leave you in awe. Whether you want to relax or engage in water
-          activities, there's something for everyone in Albania. Come and
-          discover its hidden gems for a summer vacation you'll never forget!
-        </p>
+        <h4>{props.title}</h4>
+        <p>{props.paragraf}</p>
+        {props.buttonDir ? (
+          <a href={props.buttonDir} target="_blank" rel="noopener noreferrer">
+            <ButtonLink2>{props.buttonTitle}</ButtonLink2>
+          </a>
+        ) : null}
       </TextContainer>
     </Container>
   );
@@ -102,6 +75,7 @@ const TextContainer = styled.div`
   padding: 20px;
   max-width: 50%;
   max-height: 50%;
+  text-align: center;
   h4 {
     font-size: 20px;
   }

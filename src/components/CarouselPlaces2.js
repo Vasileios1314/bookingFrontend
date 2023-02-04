@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  carouselImg2,
-  carouselImg4,
-  carouselImg7,
-  carouselImg10,
-} from "../assets";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
+import { ButtonLink2 } from "../styled";
+import { v4 as uuidv4 } from "uuid";
 
-export function CarouselPlaces2() {
+const id = uuidv4();
+
+export function CarouselPlaces2(props) {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -17,15 +15,15 @@ export function CarouselPlaces2() {
   };
 
   return (
-    <Container>
+    <Container key={id}>
       <TextContainer>
-        <h4>Summer At The Mountains of Albania: Just Do It</h4>
-        <p>
-          Discover the summer magic of Albania's mountain ranges. Enjoy scenic
-          hikes, fresh air, and breathtaking views. Immerse yourself in nature
-          and rejuvenate your spirit. A summer vacation in the mountains is a
-          unique experience not to be missed.
-        </p>
+        <h4>{props.title}</h4>
+        <p>{props.paragraf}</p>
+        {props.buttonDir ? (
+          <a href={props.buttonDir} target="_blank" rel="noopener noreferrer">
+            <ButtonLink2>{props.buttonTitle}</ButtonLink2>
+          </a>
+        ) : null}
       </TextContainer>
       <CarouselContainer>
         <Carousel
@@ -37,42 +35,19 @@ export function CarouselPlaces2() {
           controls={false}
           indicators={false}
         >
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg2}
-              alt="First slide"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg4}
-              alt="Second slide"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg7}
-              alt="Durres"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block "
-              src={carouselImg10}
-              alt="Second slide"
-              width="600px"
-              height="600px"
-            />
-          </Carousel.Item>
+          {props.fotos.map((foto) => {
+            return (
+              <Carousel.Item key={uuidv4()}>
+                <img
+                  className="d-block "
+                  src={foto}
+                  alt="First slide"
+                  width="600px"
+                  height="600px"
+                />
+              </Carousel.Item>
+            );
+          })}
         </Carousel>
       </CarouselContainer>
     </Container>
@@ -104,6 +79,8 @@ const TextContainer = styled.div`
   padding: 20px;
   max-width: 50%;
   max-height: 50%;
+  text-align: center;
+
   h4 {
     font-size: 20px;
   }

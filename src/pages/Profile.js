@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
-export function Profile() {
+export function Profile({ onRouteChange }) {
+  useEffect(() => {
+    onRouteChange(false);
+  }, []);
+  console.log("homePage", onRouteChange);
   return <div>Profile</div>;
 }

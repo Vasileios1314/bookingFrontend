@@ -5,6 +5,6 @@ export * from "./About";
 export * from "./Apartments";
 export * from "./Booking";
 export * from "./CheckOut";
-export * from "./ContactUs";
-export * from "./Details";
+export * from "./Contact";
 export * from "./Profile";
+export * from "./Discover";
