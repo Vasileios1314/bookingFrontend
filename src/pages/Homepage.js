@@ -54,18 +54,14 @@ export const Homepage = ({ onRouteChange }) => {
       <Container>
         <HeroSection>
           <InnerContainer>
-            <Title>
-              Enim occaecat ipsum reprehenderit fugiat aute elit commodo
-              reprehenderit occaecat ea amet ut adipisicing.
-            </Title>
+            <Title>Fun and Flavor in Albania</Title>
             <Paragraf>
-              Ex magna ex duis eiusmod pariatur eu cupidatat dolore
-              consequat.Consectetur in eiusmod cupidatat laborum culpa elit ad
-              reprehenderit. Laborum ea consectetur labore consectetur quis enim
-              aute est quis ea. Quis irure veniam commodo dolore cillum duis sit
-              pariatur deserunt. Quis cupidatat commodo duis consectetur mollit.
-              Dolor excepteur laboris proident nulla esse ut id esse velit non
-              dolore irure. Proident ut esse ut elit.
+              From the mountains to the sea, Albania offers adventure and
+              natural beauty. Take a guided tour in Valbona National Park, or
+              relax on a beach along the Albanian Riviera. Taste the best of
+              Albanian cuisine, a blend of Mediterranean and Balkan flavors, in
+              a traditional tavern. Try dishes like pite, byrek, and qofte, and
+              wash it down with local wine or raki.
             </Paragraf>
             <Link to={"/apartments"}>
               <ButtonLink>Take a look</ButtonLink>

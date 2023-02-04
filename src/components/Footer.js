@@ -58,7 +58,7 @@ const FooterContainer = styled.footer`
   color: #fff;
   display: flex;
   justify-content: space-between;
-  padding: 50px;
+  padding: 40px;
   ${(props) => (props.homePage ? "position: relative;" : "position: absolute;")}
   width: 100%;
   bottom: 0px;
@@ -101,7 +101,7 @@ const Links = styled.div`
     cursor: pointer;
   }
   @media (max-width: 800px) {
-    padding-top: 20px;
+    padding-top: 10px;
   }
 `;
 
@@ -109,6 +109,6 @@ const FooterText = styled.div`
   text-align: center;
   font-size: 0.7rem;
   @media (max-width: 800px) {
-    padding-top: 20px;
+    padding-top: 10px;
   }
 `;
