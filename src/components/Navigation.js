@@ -85,9 +85,11 @@ const Nav = styled.div`
 
 const Logo = styled.a`
   z-index: 10;
-  width: 100px;
+  margin-top: 10px;
+  width: 150px;
   height: 120px;
   @media (max-width: 780px) {
+    margin-top: 10px;
     width: 50px;
     height: 70px;
   }

@@ -53,8 +53,23 @@ export function Footer({ homePage }) {
   );
 }
 
+// const FooterContainer = styled.footer`
+//   background-color: #333;
+//   color: #fff;
+//   display: flex;
+//   justify-content: space-between;
+//   padding: 40px;
+//   ${(props) => (props.homePage ? "position: relative;" : "position: absolute;")}
+//   width: 100%;
+//   bottom: 0px;
+
+//   @media (max-width: 800px) {
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// `;
 const FooterContainer = styled.footer`
-  background-color: #333;
+  background: linear-gradient(to bottom, #333, #555);
   color: #fff;
   display: flex;
   justify-content: space-between;
