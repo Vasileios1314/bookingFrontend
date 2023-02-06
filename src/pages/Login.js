@@ -20,7 +20,6 @@ export const Login = ({ onRouteChange }) => {
   useEffect(() => {
     onRouteChange(false);
   }, []);
-  console.log("homePage", onRouteChange);
 
   useEffect(() => {
     if (token !== null) {
