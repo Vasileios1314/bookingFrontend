@@ -11,28 +11,36 @@ export function Apartments({ onRouteChange }) {
 
   useEffect(() => {
     dispatch(getApartments());
-    onRouteChange(false);
+    onRouteChange(true);
   }, []);
   console.log("apartments", apartments);
+  const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  `;
 
   return apartments.map((item) => {
     return (
-      <ApartmentCard
-        key={item.id}
-        availabilities={item.availabilities}
-        balcony={item.balcony}
-        bedroom={item.bedroom}
-        comments={item.comments}
-        description={item.description}
-        image={item.image}
-        location={item.location}
-        maxPeople={item.maxPeople}
-        name={item.name}
-        parking={item.parking}
-        pet={item.pet}
-        price={item.price}
-        rating={item.rating}
-      />
+      <Container>
+        <ApartmentCard
+          key={item.id}
+          availabilities={item.availabilities}
+          balcony={item.balcony}
+          bedroom={item.bedroom}
+          comments={item.comments}
+          description={item.description}
+          image={item.image}
+          location={item.location}
+          maxPeople={item.maxPeople}
+          name={item.name}
+          parking={item.parking}
+          pet={item.pet}
+          price={item.price}
+          rating={item.ratings}
+        />
+      </Container>
     );
   });
 }
