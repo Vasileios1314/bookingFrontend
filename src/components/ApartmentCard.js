@@ -1,83 +1,87 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faEmptyStar } from "@fortawesome/free-solid-svg-icons";
-// import StarRating from "react-rating-stars-component";
+import { Stars } from "../components";
 
 export function ApartmentCard(props) {
-  const Star = styled.i`
-    font-size: 20px;
-    color: #ffc107;
-    &:before {
-      content: "\f005";
-      font-family: "Font Awesome 5 Free";
-    }
-  `;
-
-  const EmptyStar = styled.i`
-    font-size: 20px;
-    color: #e4e5e9;
-    &:before {
-      content: "\f006";
-      font-family: "Font Awesome 5 Free";
-    }
-  `;
-
-  function RatingStars({ rating }) {
-    const stars = [];
-    for (let i = 0; i < 5; i++) {
-      if (i < rating) {
-        stars.push(
-          <Star>
-            <faStar key={i} />
-          </Star>
-        );
-      } else {
-        stars.push(<EmptyStar>{/* <StarRating key={i} /> */}</EmptyStar>);
-      }
-    }
-
-    return <div>{stars}</div>;
-  }
   const Name = styled.h2`
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
   `;
 
   const Location = styled.h3`
     font-size: 18px;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
   `;
 
   const Bedroom = styled.p`
     font-size: 16px;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
   `;
 
   const Balcony = styled.p`
     font-size: 16px;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
   `;
 
   const Price = styled.p`
     font-size: 16px;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
   `;
 
   const Pet = styled.p`
     font-size: 16px;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
   `;
 
   const Description = styled.p`
     font-size: 14px;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 10px;
+      margin-bottom: 0;
+    }
   `;
 
   const Parking = styled.p`
     font-size: 16px;
     margin-bottom: 10px;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
   `;
 
   const CardWrapper = styled.div`
@@ -90,6 +94,12 @@ export function ApartmentCard(props) {
     height: 300px;
     display: flex;
     justify-content: flex-end;
+    @media (max-width: 600px) {
+      width: 95%;
+      margin: 10px;
+      max-height: 95%;
+      margin-bottom: 20px;
+    }
   `;
 
   const ImageWrapper = styled.div`
@@ -99,6 +109,10 @@ export function ApartmentCard(props) {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    @media (max-width: 600px) {
+      width: 50%;
+      height: 100%;
+    }
   `;
 
   const InfoWrapper = styled.div`
@@ -108,6 +122,19 @@ export function ApartmentCard(props) {
     flex-direction: row;
     justify-content: center;
     position: relative;
+    @media (max-width: 1024px) {
+      width: 80%;
+    }
+
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
   `;
 
   const TitleWrapper = styled.div`
@@ -117,6 +144,10 @@ export function ApartmentCard(props) {
     margin-bottom: 20px;
     width: 50%;
     margin-right: auto;
+    @media (max-width: 480px) {
+      width: 100%;
+      margin-bottom: 0;
+    }
   `;
 
   const Reviews = styled.div`
@@ -132,6 +163,16 @@ export function ApartmentCard(props) {
       color: #bd2323;
       cursor: pointer;
     }
+    @media (max-width: 600px) {
+      font-size: 12px;
+      align-items: center;
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
+      margin-bottom: 20px;
+      align-items: center;
+    }
   `;
   const Ratings = styled.div`
     display: flex;
@@ -140,6 +181,12 @@ export function ApartmentCard(props) {
     margin-top: 40px;
     width: 50%;
     margin-right: auto;
+    @media (max-width: 480px) {
+      width: 90%;
+      align-items: center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   `;
 
   const RestInfoWrapper = styled.div`
@@ -152,11 +199,17 @@ export function ApartmentCard(props) {
     align-items: center;
     position: relative;
     color: #5e5d5d;
+    @media (max-width: 480px) {
+      margin-top: 2px;
+      align-items: center;
+      bottom: 20px;
+      left: 0;
+    }
   `;
 
   const Button = styled.button`
     background-color: #4caf50;
-    border: 4px solid #4caf50;
+    border: 2px solid #4caf50;
     color: white;
     font-weight: bold;
     padding: 15px 32px;
@@ -166,12 +219,18 @@ export function ApartmentCard(props) {
     font-size: 16px;
     margin-top: 10px;
     border-radius: 99px;
+    @media only screen and (max-width: 800px) {
+      font-size: 14px;
+      margin-top: 5px;
+      padding: 5px;
+    }
 
     &:hover {
-      border: 3px solid #4caf50;
+      border: 2px solid #4caf50;
       color: ${(props) => (props.primary ? "white" : "#4caf50")};
       background: ${(props) => (props.primary ? "#fff" : "#fff")};
       cursor: pointer;
+    }
   `;
 
   return (
@@ -183,11 +242,13 @@ export function ApartmentCard(props) {
           <Location>{props.location}</Location>
           <Description>{props.description}</Description>
           <Ratings>
-            <RatingStars rating={props.rating} />
-            {props.rating.length} ratings
+            <Stars rating={props.rating} edit={false} isHalf={true} />
           </Ratings>
         </TitleWrapper>
-        <Reviews>{props.comments.length} Reviews</Reviews>
+        <Reviews>
+          {props.comments.length}{" "}
+          {props.comments.length === 1 ? "Review" : "Reviews"}
+        </Reviews>
         <RestInfoWrapper>
           <Bedroom>Bedroom: {props.bedroom}</Bedroom>
           <Balcony>Balcony: {props.balcony ? "Yes" : "No"}</Balcony>

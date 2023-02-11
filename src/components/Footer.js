@@ -13,6 +13,7 @@ export function Footer({ homePage }) {
   return (
     <FooterContainer homePage={homePage}>
       <SocialIcons>
+        <p>Follow Us</p>
         <a
           href="https://www.facebook.com/"
           target="_blank"
@@ -58,7 +59,7 @@ const FooterContainer = styled.footer`
   color: #fff;
   display: flex;
   justify-content: space-between;
-  padding: 40px;
+  padding: 46px;
   ${(props) => (props.homePage ? "position: relative;" : "position: absolute;")}
   width: 100%;
   bottom: 0px;

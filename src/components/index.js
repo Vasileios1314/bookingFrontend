@@ -7,3 +7,5 @@ export * from "./Billing";
 export * from "./Footer";
 export * from "./ApartmentCard";
 export * from "./CarouselPlaces2";
+export * from "./Stars";
+export * from "./Filters";
