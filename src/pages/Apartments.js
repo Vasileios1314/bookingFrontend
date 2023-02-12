@@ -30,7 +30,7 @@ export function Apartments({ onRouteChange }) {
       return (
         <Container>
           <ApartmentCard
-            key={item.id}
+            id={item.id}
             availabilities={item.availabilities}
             balcony={item.balcony}
             bedroom={item.bedroom}

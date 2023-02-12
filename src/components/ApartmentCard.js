@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Stars } from "../components";
 
@@ -232,9 +233,8 @@ export function ApartmentCard(props) {
       cursor: pointer;
     }
   `;
-
   return (
-    <CardWrapper key={props.key}>
+    <CardWrapper>
       <ImageWrapper image={props.image} />
       <InfoWrapper>
         <TitleWrapper>
@@ -255,7 +255,9 @@ export function ApartmentCard(props) {
           <Price>Price: ${props.price}/month</Price>
           <Pet>Pet: {props.pet ? "No" : "Yes"}</Pet>
           <Parking>Parking: {props.parking ? "Yes" : "No"}</Parking>
-          <Button>See Availability</Button>
+          <Link to={`/apartments/${props.id}`}>
+            <Button>See Availability</Button>
+          </Link>
         </RestInfoWrapper>
       </InfoWrapper>
     </CardWrapper>

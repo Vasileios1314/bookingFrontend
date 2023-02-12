@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   apartments: [],
+  apartmentById: {},
 };
 
 export const apartmentSlice = createSlice({
@@ -11,9 +12,12 @@ export const apartmentSlice = createSlice({
     fetchApartments: (state, action) => {
       state.apartments = action.payload.apartment;
     },
+    fetchApartmentById: (state, action) => {
+      state.apartmentById = action.payload.apartmentById;
+    },
   },
 });
 
-export const { fetchApartments } = apartmentSlice.actions;
+export const { fetchApartments, fetchApartmentById } = apartmentSlice.actions;
 
 export default apartmentSlice.reducer;

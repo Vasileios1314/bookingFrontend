@@ -150,6 +150,14 @@ const FilterSection = styled.div`
   position: fixed;
   top: 140px;
   border-radius: 5px;
+
+  @media (max-width: 800px) {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    top: auto;
+    left: auto;
+  }
 `;
 
 const FilterTitle = styled.h2`
@@ -175,6 +183,9 @@ const FilterInput = styled.input`
   border-radius: 5px;
   border: none;
   margin-bottom: 3px;
+  @media (max-width: 800px) {
+    width: 80vw;
+  }
 `;
 
 const FilterSelect = styled.select`
@@ -183,4 +194,7 @@ const FilterSelect = styled.select`
   font-size: 16px;
   border-radius: 5px;
   border: none;
+  @media (max-width: 800px) {
+    width: 80vw;
+  }
 `;

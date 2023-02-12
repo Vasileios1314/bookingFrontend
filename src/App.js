@@ -48,7 +48,7 @@ function App() {
           element={<Apartments onRouteChange={setHomePage} />}
         />
         <Route
-          path="/booking"
+          path="/apartments/:id"
           element={<Booking onRouteChange={setHomePage} />}
         />
       </Routes>
