@@ -5,7 +5,7 @@ import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
 
-export const signUp = (email, password, name, country, city, phone, image) => {
+export const signUp = (email, password, name) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     // name: "twra",
@@ -21,12 +21,9 @@ export const signUp = (email, password, name, country, city, phone, image) => {
         email,
         password,
         name,
-        country,
-        city,
-        phone,
-        image,
         isAdmin: false,
       });
+      console.log("response.data", email, password, name);
       dispatch(
         loginSuccess({ token: response.data.token, user: response.data.user })
       );

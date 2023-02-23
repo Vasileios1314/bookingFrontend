@@ -17,7 +17,6 @@ export const apartmentSlice = createSlice({
     },
   },
 });
-
 export const { fetchApartments, fetchApartmentById } = apartmentSlice.actions;
 
 export default apartmentSlice.reducer;

@@ -24,8 +24,6 @@ export const SignUp = ({ onRouteChange }) => {
     onRouteChange(false);
   }, []);
 
-  console.log("homePage", onRouteChange);
-
   useEffect(() => {
     if (token !== null) {
       navigate("/");
