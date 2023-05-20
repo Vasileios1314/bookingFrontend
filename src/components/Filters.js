@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export function Filters({ apartments, handleFilter }) {
+  console.log("apartmentsFilter", apartments);
   const [filter, setFilter] = useState({
     location: "Select All",
     balcony: "Select All",
@@ -147,8 +148,7 @@ const FilterSection = styled.div`
   align-items: center;
   background-color: #ffc107;
   padding: 20px;
-  position: fixed;
-  top: 140px;
+  position: absolute;
   border-radius: 5px;
 
   @media (max-width: 800px) {

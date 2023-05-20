@@ -10,36 +10,41 @@ export function Booking({ onRouteChange }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const apartment = useSelector(selectApartment);
+  try {
+    useEffect(() => {
+      dispatch(apartmentId(id));
+      onRouteChange(false);
+    }, []);
+    console.log("selectApartmentById", apartment);
 
-  useEffect(() => {
-    dispatch(apartmentId(id));
-    onRouteChange(false);
-  }, []);
-  console.log("selectApartmentById", apartment);
-
-  return (
-    <ApartmentContainer>
-      <TitleContainer>
-        <Title>{apartment.name}</Title>
-      </TitleContainer>
-      <RatingContainer>
-        <Rating>
-          <Stars rating={apartment?.ratings} edit={true} isHalf={false} />
-        </Rating>
-      </RatingContainer>
-      <ImageContainer>
-        <Image src={apartment.image} alt={apartment.name} />
-      </ImageContainer>
-      <DescriptionContainer>
-        <Description>{apartment.description}</Description>
-      </DescriptionContainer>
-      <CommentsContainer>
-        {apartment.comments.map((comment, index) => (
-          <Comment>{comment.comment}</Comment>
-        ))}
-      </CommentsContainer>
-    </ApartmentContainer>
-  );
+    return (
+      <ApartmentContainer key={apartment.id}>
+        <TitleContainer>
+          <Title>{apartment.name}</Title>
+        </TitleContainer>
+        <RatingContainer>
+          <Rating>
+            <Stars rating={apartment?.ratings} edit={true} isHalf={false} />
+          </Rating>
+        </RatingContainer>
+        <ImageContainer>
+          <Image src={apartment.image} alt={apartment.name} />
+        </ImageContainer>
+        <DescriptionContainer>
+          <Description>{apartment.description}</Description>
+        </DescriptionContainer>
+        <CommentsContainer>
+          {apartment &&
+            apartment.comments &&
+            apartment.comments.map((comment, index) => (
+              <Comment key={index}>{comment.comment}</Comment>
+            ))}
+        </CommentsContainer>
+      </ApartmentContainer>
+    );
+  } catch (error) {
+    console.log(error); // Log the specific error
+  }
 }
 const ApartmentContainer = styled.div`
   display: flex;

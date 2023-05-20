@@ -234,7 +234,7 @@ export function ApartmentCard(props) {
     }
   `;
   return (
-    <CardWrapper>
+    <CardWrapper key={props.id}>
       <ImageWrapper image={props.image} />
       <InfoWrapper>
         <TitleWrapper>

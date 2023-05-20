@@ -4,12 +4,16 @@ import ReactStars from "react-rating-stars-component";
 
 export const Stars = (props) => {
   const dispatch = useDispatch();
-  console.log("props", props);
+
+  const averageRating =
+    props.rating && props.rating.length > 0
+      ? props.rating.reduce((sum, current) => sum + current.rating, 0) /
+        props.rating.length
+      : 0;
+
   let firstExample = {
     size: 30,
-    value:
-      props.rating?.reduce((sum, current) => sum + current.rating, 0) /
-      props.rating?.length,
+    value: averageRating,
     isHalf: props.isHalf,
     edit: props.edit,
     onChange: (newValue) => {

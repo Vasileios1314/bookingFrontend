@@ -11,7 +11,7 @@ export const getApartments = () => {
     try {
       const response = await axios.get(`${apiUrl}/apartments`);
       dispatch(fetchApartments({ apartment: response.data }));
-      console.log("res", response.data);
+      // console.log("res", response.data);
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -44,8 +44,8 @@ export const apartmentId = (id) => {
 
     try {
       const response = await axios.get(`${apiUrl}/apartments/${id}`);
-      console.log("response.data", response);
       dispatch(fetchApartmentById({ apartmentById: response.data }));
+      // console.log("response.data", response.data);
       dispatch(appDoneLoading());
     } catch (e) {
       console.log(e.message);
