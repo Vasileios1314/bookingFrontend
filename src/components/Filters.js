@@ -2,30 +2,32 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export function Filters({ apartments, handleFilter }) {
-  console.log("apartmentsFilter", apartments);
   const [filter, setFilter] = useState({
-    location: "Select All",
     balcony: "Select All",
     bedroom: "Select All",
     maxPeople: "Select All",
     parking: "Select All",
     pet: "Select All",
-    priceRange: "Select All",
-    ratingRange: "Select All",
-    checkIn: "",
-    checkout: "",
-    search: "",
+    ratingRange: "5",
   });
 
   const handleChange = (event) => {
-    setFilter({ ...filter, [event.target.name]: event.target.value });
-    handleFilter(filter);
+    const { name, value } = event.target;
+
+    let filterValue = value;
+    if (value === "Select All") {
+      filterValue = "Select All"; // Set to null for "Select All" option
+    } else if (name === "ratingRange") {
+      value === "Select All"
+        ? (filterValue = "Select All")
+        : (filterValue = value);
+    } else {
+      filterValue = value === "yes" ? true : false; // Convert "yes" or "no" to true or false
+    }
+    setFilter((prevFilter) => ({ ...prevFilter, [name]: filterValue }));
+    handleFilter({ ...filter, [name]: filterValue });
   };
 
-  const locationOptions = [
-    "Select All",
-    ...new Set(apartments.map((apartment) => apartment.location)),
-  ];
   const balconyOptions = ["Select All", "yes", "no"];
   const bedroomOptions = [
     "Select All",
@@ -37,31 +39,11 @@ export function Filters({ apartments, handleFilter }) {
   ];
   const parkingOptions = ["Select All", "yes", "no"];
   const petOptions = ["Select All", "yes", "no"];
-  const priceRangeOptions = ["Select All", "$", "$$", "$$$", "$$$$"];
   const ratingRangeOptions = ["Select All", "1", "2", "3", "4", "5"];
 
   return (
     <FilterSection>
       <FilterTitle>Search</FilterTitle>
-      <FilterOption>
-        <FilterLabel htmlFor="search"></FilterLabel>
-        <FilterInput
-          type="text"
-          name="search"
-          id="search"
-          onChange={handleChange}
-        />
-      </FilterOption>
-      <FilterOption>
-        <FilterLabel htmlFor="location">Location</FilterLabel>
-        <FilterSelect name="location" id="location" onChange={handleChange}>
-          {locationOptions.map((location) => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </FilterSelect>
-      </FilterOption>
       <FilterOption>
         <FilterLabel htmlFor="balcony">Balcony</FilterLabel>
         <FilterSelect name="balcony" id="balcony" onChange={handleChange}>
@@ -113,28 +95,19 @@ export function Filters({ apartments, handleFilter }) {
         </FilterSelect>
       </FilterOption>
       <FilterOption>
-        <FilterLabel htmlFor="priceRange">Price Range</FilterLabel>
-        <FilterSelect name="priceRange" id="priceRange" onChange={handleChange}>
-          {priceRangeOptions.map((priceRange) => (
-            <option key={priceRange} value={priceRange}>
-              {priceRange}
-            </option>
-          ))}
-        </FilterSelect>
-      </FilterOption>
-      <FilterOption>
         <FilterLabel htmlFor="ratingRange">Rating Range</FilterLabel>
-        <FilterSelect
+        <FilterRange
+          type="range"
           name="ratingRange"
           id="ratingRange"
+          min="1"
+          max="5"
+          step="1"
           onChange={handleChange}
-        >
-          {ratingRangeOptions.map((ratingRange) => (
-            <option key={ratingRange} value={ratingRange}>
-              {ratingRange}
-            </option>
-          ))}
-        </FilterSelect>
+        />
+        <FilterRangeLabel>
+          {filter.ratingRange} {filter.ratingRange === "1" ? "Star" : "Stars"}
+        </FilterRangeLabel>
       </FilterOption>
     </FilterSection>
   );
@@ -143,7 +116,7 @@ export function Filters({ apartments, handleFilter }) {
 const FilterSection = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 65%;
+  min-height: 55%;
   width: 30%;
   align-items: center;
   background-color: #ffc107;
@@ -168,24 +141,12 @@ const FilterTitle = styled.h2`
 const FilterOption = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const FilterLabel = styled.label`
   font-weight: bold;
   margin-bottom: 3px;
-`;
-
-const FilterInput = styled.input`
-  width: 28vw;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  margin-bottom: 3px;
-  @media (max-width: 800px) {
-    width: 80vw;
-  }
 `;
 
 const FilterSelect = styled.select`
@@ -197,4 +158,18 @@ const FilterSelect = styled.select`
   @media (max-width: 800px) {
     width: 80vw;
   }
+`;
+const FilterRange = styled.input`
+  width: 28vw;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  @media (max-width: 800px) {
+    width: 80vw;
+  }
+`;
+
+const FilterRangeLabel = styled.span`
+  font-size: 16px;
+  margin-top: 5px;
 `;

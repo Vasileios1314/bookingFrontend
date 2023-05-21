@@ -253,7 +253,7 @@ export function ApartmentCard(props) {
           <Bedroom>Bedroom: {props.bedroom}</Bedroom>
           <Balcony>Balcony: {props.balcony ? "Yes" : "No"}</Balcony>
           <Price>Price: ${props.price}/month</Price>
-          <Pet>Pet: {props.pet ? "No" : "Yes"}</Pet>
+          <Pet>Pet: {props.pet === false ? "No" : "Yes"}</Pet>
           <Parking>Parking: {props.parking ? "Yes" : "No"}</Parking>
           <Link to={`/apartments/${props.id}`}>
             <Button>See Availability</Button>

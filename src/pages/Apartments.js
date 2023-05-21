@@ -12,14 +12,12 @@ export function Apartments({ onRouteChange }) {
 
   const [filteredApartments, setFilteredApartments] = useState(apartments);
   const [filter, setFilter] = useState({
-    location: "Select All",
     balcony: "Select All",
     bedroom: "Select All",
     maxPeople: "Select All",
     parking: "Select All",
     pet: "Select All",
-    priceRange: "Select All",
-    ratingRange: "Select All",
+    ratingRange: "5",
   });
 
   const handleFilter = (newFilter) => {
@@ -33,14 +31,6 @@ export function Apartments({ onRouteChange }) {
 
   useEffect(() => {
     const filtered = apartments.filter((apartment) => {
-      // Filter based on location
-      if (
-        filter.location !== "Select All" &&
-        apartment.location !== filter.location
-      ) {
-        return false;
-      }
-
       // Filter based on balcony
       if (
         filter.balcony !== "Select All" &&
@@ -78,24 +68,13 @@ export function Apartments({ onRouteChange }) {
         return false;
       }
 
-      // Filter based on price range
-      if (filter.priceRange !== "Select All") {
-        const priceRangeMap = {
-          $: [0, 100],
-          $$: [101, 200],
-          $$$: [201, 300],
-          $$$$: [301, 400],
-        };
-        const [minPrice, maxPrice] = priceRangeMap[filter.priceRange];
-        if (apartment.price < minPrice || apartment.price > maxPrice) {
-          return false;
-        }
-      }
-
       // Filter based on rating range
       if (filter.ratingRange !== "Select All") {
         const minRating = parseInt(filter.ratingRange);
-        if (apartment.ratings < minRating) {
+        const averageRating =
+          apartment.ratings.reduce((sum, rating) => sum + rating.rating, 0) /
+          apartment.ratings.length;
+        if (averageRating > minRating) {
           return false;
         }
       }
@@ -104,23 +83,13 @@ export function Apartments({ onRouteChange }) {
     });
 
     setFilteredApartments(filtered);
-    onRouteChange(true);
   }, [filter, apartments]);
-
-  const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    @media (max-width: 800px) {
-      flex-direction: column;
-    }
-  `;
 
   const ApartmentList = ({ apartments }) => {
     return apartments.map((item) => {
       return (
         <Container>
+          {filteredApartments.length === 0 && <Text>No Results</Text>}
           <ApartmentCard
             id={item.id}
             availabilities={item.availabilities}
@@ -142,6 +111,11 @@ export function Apartments({ onRouteChange }) {
     });
   };
 
+  if (filteredApartments.length === 0) {
+    console.log("first", filteredApartments.length);
+  } else {
+    console.log("second", filteredApartments.length);
+  }
   return (
     <OutterContainer>
       <Hero
@@ -155,6 +129,23 @@ export function Apartments({ onRouteChange }) {
   );
 }
 
+//set min-height for the filter
 const OutterContainer = styled.div`
+  min-height: 170vh;
   margin: 20px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+`;
+
+const Text = styled.p`
+  font-size: 18px;
+  margin-bottom: 10px;
 `;
