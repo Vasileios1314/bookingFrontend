@@ -89,7 +89,6 @@ export function Apartments({ onRouteChange }) {
     return apartments.map((item) => {
       return (
         <Container>
-          {filteredApartments.length === 0 && <Text>No Results</Text>}
           <ApartmentCard
             id={item.id}
             availabilities={item.availabilities}
@@ -124,6 +123,7 @@ export function Apartments({ onRouteChange }) {
         paragraf=" Luxurious amenities, spacious rooms, and breathtaking views."
       />
       <Filters apartments={apartments} handleFilter={handleFilter} />
+      {filteredApartments.length === 0 && <Text>No Results</Text>}
       <ApartmentList apartments={filteredApartments} />
     </OutterContainer>
   );
@@ -146,6 +146,10 @@ const Container = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 18px;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  margin-top: 50px;
 `;
