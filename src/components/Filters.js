@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export function Filters({ apartments, handleFilter }) {
   const [filter, setFilter] = useState({
-    balcony: "Select All",
+    balcony: "",
     bedroom: "Select All",
-    maxPeople: "Select All",
     parking: "Select All",
     pet: "Select All",
     ratingRange: "5",
@@ -18,9 +19,7 @@ export function Filters({ apartments, handleFilter }) {
     if (value === "Select All") {
       filterValue = "Select All"; // Set to null for "Select All" option
     } else if (name === "ratingRange") {
-      value === "Select All"
-        ? (filterValue = "Select All")
-        : (filterValue = value);
+      value === "5" ? (filterValue = "5") : (filterValue = value);
     } else {
       filterValue = value === "yes" ? true : false; // Convert "yes" or "no" to true or false
     }
@@ -33,17 +32,15 @@ export function Filters({ apartments, handleFilter }) {
     "Select All",
     ...new Set(apartments.map((apartment) => apartment.bedroom)),
   ];
-  const maxPeopleOptions = [
-    "Select All",
-    ...new Set(apartments.map((apartment) => apartment.maxPeople)),
-  ];
+
   const parkingOptions = ["Select All", "yes", "no"];
   const petOptions = ["Select All", "yes", "no"];
-  const ratingRangeOptions = ["Select All", "1", "2", "3", "4", "5"];
 
   return (
     <FilterSection>
-      <FilterTitle>Search</FilterTitle>
+      <FilterTitle>
+        <FontAwesomeIcon icon={faMagnifyingGlass} /> &nbsp;Search
+      </FilterTitle>
       <FilterOption>
         <FilterLabel htmlFor="balcony">Balcony</FilterLabel>
         <FilterSelect name="balcony" id="balcony" onChange={handleChange}>
@@ -60,16 +57,6 @@ export function Filters({ apartments, handleFilter }) {
           {bedroomOptions.map((bedroom) => (
             <option key={bedroom} value={bedroom}>
               {bedroom}
-            </option>
-          ))}
-        </FilterSelect>
-      </FilterOption>
-      <FilterOption>
-        <FilterLabel htmlFor="maxPeople">Max People</FilterLabel>
-        <FilterSelect name="maxPeople" id="maxPeople" onChange={handleChange}>
-          {maxPeopleOptions.map((maxPeople) => (
-            <option key={maxPeople} value={maxPeople}>
-              {maxPeople}
             </option>
           ))}
         </FilterSelect>

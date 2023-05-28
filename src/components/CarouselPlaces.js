@@ -30,7 +30,7 @@ export function CarouselPlaces(props) {
             return (
               <Carousel.Item key={uuidv4()}>
                 <img
-                  className="d-block "
+                  className="d-block w-100"
                   src={foto}
                   alt="First slide"
                   width="600px"

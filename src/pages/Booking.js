@@ -4,9 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { apartmentId } from "../store/apartment/thunks";
 import { selectApartment } from "../store/apartment/selectors";
 import styled from "styled-components";
-import { Stars } from "../components";
+import { Stars, Comments, BookingCalendar } from "../components";
 import ReactImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBookOpen,
+  faLeaf,
+  faMapMarker,
+  faPaw,
+  faPeopleGroup,
+  faPeopleRoof,
+  faWifi,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function Booking({ onRouteChange }) {
   const { id } = useParams();
@@ -16,7 +26,7 @@ export function Booking({ onRouteChange }) {
   try {
     useEffect(() => {
       dispatch(apartmentId(id));
-      onRouteChange(false);
+      onRouteChange(true);
     }, []);
     console.log("selectApartmentById", apartment);
 
@@ -24,10 +34,20 @@ export function Booking({ onRouteChange }) {
       <ApartmentContainer key={apartment.id}>
         <TitleContainer>
           <Title>{apartment.name}</Title>
+          <SubTitle>
+            {" "}
+            <FontAwesomeIcon icon={faMapMarker} /> &nbsp;
+            {apartment.location}
+          </SubTitle>
         </TitleContainer>
         <RatingContainer>
           <Rating>
-            <Stars rating={apartment?.ratings} edit={true} isHalf={false} />
+            <Stars
+              rating={apartment?.ratings}
+              edit={true}
+              isHalf={false}
+              size={window.innerWidth <= 480 ? 20 : 30}
+            />
           </Rating>
         </RatingContainer>
         <ImageContainer>
@@ -39,22 +59,47 @@ export function Booking({ onRouteChange }) {
               }))}
               showBullets={true}
               thumbnailPosition="left"
-              // Adjust the following props as desired
               renderItem={(item) => (
                 <Image src={item.original} alt={item.originalAlt} />
               )}
             />
           )}
         </ImageContainer>
-        <DescriptionContainer>
-          <Description>{apartment.description}</Description>
-        </DescriptionContainer>
+        <DescriptionAmenitiesContainer>
+          <DescriptionContainer>
+            <DescriptionTitle>
+              <FontAwesomeIcon icon={faBookOpen} /> &nbsp; Description
+            </DescriptionTitle>
+            <DescriptionText>{apartment.description}</DescriptionText>
+          </DescriptionContainer>
+          <DescriptionContainer>
+            <DescriptionTitle>Amenities</DescriptionTitle>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faWifi} /> &nbsp; Wifi: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faPeopleGroup} /> &nbsp; Max capacity:{" "}
+              {apartment.maxPeople} persons.
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faPaw} /> &nbsp; Pet Friendly:{" "}
+              {apartment.pet ? "Yes" : "No"}
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faLeaf} /> &nbsp; Balcony:{" "}
+              {apartment.balcony ? "Yes" : "No"}
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faPeopleRoof} /> &nbsp; Number of Bedrooms:{" "}
+              {apartment.bedroom}
+            </DescriptionText>
+          </DescriptionContainer>
+        </DescriptionAmenitiesContainer>
         <CommentsContainer>
-          {apartment &&
-            apartment.comments &&
-            apartment.comments.map((comment, index) => (
-              <Comment key={index}>{comment.comment}</Comment>
-            ))}
+          <BookingCalendar availabilities={apartment?.availabilities} />
+        </CommentsContainer>
+        <CommentsContainer>
+          <Comments comments={apartment?.comments} />
         </CommentsContainer>
       </ApartmentContainer>
     );
@@ -62,6 +107,7 @@ export function Booking({ onRouteChange }) {
     console.log(error); // Log the specific error
   }
 }
+
 const ApartmentContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -69,9 +115,8 @@ const ApartmentContainer = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: flex-start;
   margin-left: 40px;
   margin-top: 10px;
 `;
@@ -79,6 +124,10 @@ const TitleContainer = styled.div`
 const Title = styled.h2`
   font-size: 24px;
   font-weight: bold;
+  margin: 0;
+`;
+
+const SubTitle = styled.p`
   margin: 0;
 `;
 
@@ -111,28 +160,37 @@ const Image = styled.img`
   border-radius: 8px;
 `;
 
-const DescriptionContainer = styled.div`
+const DescriptionAmenitiesContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 20px;
-  width: 50%;
+  justify-content: space-between;
 `;
 
-const Description = styled.p`
-  font-size: 18px;
+const DescriptionContainer = styled.div`
+  flex-basis: 48%;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 20px;
+  background-color: #e4f4ff;
+  border-radius: 8px;
+`;
+
+const DescriptionTitle = styled.h3`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+const DescriptionText = styled.p`
+  font-size: 16px;
   margin: 0;
 `;
 
 const CommentsContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  width: 50%;
-`;
-
-const Comment = styled.p`
-  font-size: 18px;
-  margin: 0;
 `;

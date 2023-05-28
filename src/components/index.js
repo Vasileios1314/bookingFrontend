@@ -9,3 +9,5 @@ export * from "./ApartmentCard";
 export * from "./CarouselPlaces2";
 export * from "./Stars";
 export * from "./Filters";
+export * from "./Comments";
+export * from "./BookingCalendar";

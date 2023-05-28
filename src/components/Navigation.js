@@ -10,6 +10,9 @@ import {
   faTimes,
   faSignOut,
   faSignIn,
+  faHouse,
+  faMeteor,
+  faHandshake,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const Navigation = () => {
@@ -36,9 +39,18 @@ export const Navigation = () => {
         </Hamburger>
       )}
       <Menu open={open}>
-        <MenuLink to={"/apartments"}>Apartments</MenuLink>
-        <MenuLink to={"/discover"}>Discover</MenuLink>
-        <MenuLink to={"/about"}>About us</MenuLink>
+        <MenuLink to={"/apartments"}>
+          {" "}
+          <FontAwesomeIcon icon={faHouse} /> &nbsp; Apartments
+        </MenuLink>
+        <MenuLink to={"/discover"}>
+          {" "}
+          <FontAwesomeIcon icon={faMeteor} /> &nbsp; Discover
+        </MenuLink>
+        <MenuLink to={"/about"}>
+          {" "}
+          <FontAwesomeIcon icon={faHandshake} /> &nbsp; About us
+        </MenuLink>
         {token ? (
           <MenuLink as="div" onClick={() => dispatch(logOut())}>
             <FontAwesomeIcon icon={faSignOut} />
@@ -97,7 +109,7 @@ const Logo = styled.a`
 
 const Img = styled.img`
   z-index: 10;
-  width: 100px;
+  width: 150px;
   height: 120px;
   @media (max-width: 780px) {
     width: 50px;

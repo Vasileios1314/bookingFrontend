@@ -2,6 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Stars } from "../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMapMarker,
+  faPeopleRoof,
+  faLeaf,
+  faDollarSign,
+  faParking,
+  faPaw,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function ApartmentCard(props) {
   const Name = styled.h2`
@@ -160,7 +169,11 @@ export function ApartmentCard(props) {
     font-size: 14px;
     color: #363636;
 
-    &:hover {
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
       color: #bd2323;
       cursor: pointer;
     }
@@ -180,10 +193,10 @@ export function ApartmentCard(props) {
     flex-direction: column;
     align-items: left;
     margin-top: 40px;
-    width: 50%;
+    width: 60%;
     margin-right: auto;
     @media (max-width: 480px) {
-      width: 90%;
+      width: 100%;
       align-items: center;
       margin-top: 0;
       margin-bottom: 0;
@@ -239,22 +252,47 @@ export function ApartmentCard(props) {
       <InfoWrapper>
         <TitleWrapper>
           <Name>{props.name}</Name>
-          <Location>{props.location}</Location>
+          <Location>
+            <FontAwesomeIcon icon={faMapMarker} /> &nbsp;
+            {props.location}
+          </Location>
           <Description>{props.description}</Description>
           <Ratings>
-            <Stars rating={props.rating} edit={false} isHalf={true} />
+            <Stars
+              rating={props.rating}
+              edit={false}
+              isHalf={true}
+              size={window.innerWidth <= 480 ? 20 : 30}
+            />
           </Ratings>
         </TitleWrapper>
         <Reviews>
-          {props.comments.length}{" "}
-          {props.comments.length === 1 ? "Review" : "Reviews"}
+          <Link to={`/apartments/${props.id}`}>
+            {props.comments.length}{" "}
+            {props.comments.length === 1 ? "Review" : "Reviews"}
+          </Link>
         </Reviews>
         <RestInfoWrapper>
-          <Bedroom>Bedroom: {props.bedroom}</Bedroom>
-          <Balcony>Balcony: {props.balcony ? "Yes" : "No"}</Balcony>
-          <Price>Price: ${props.price}/month</Price>
-          <Pet>Pet: {props.pet === false ? "No" : "Yes"}</Pet>
-          <Parking>Parking: {props.parking ? "Yes" : "No"}</Parking>
+          <Bedroom>
+            <FontAwesomeIcon icon={faPeopleRoof} /> &nbsp; Bedroom:{" "}
+            {props.bedroom}
+          </Bedroom>
+          <Balcony>
+            <FontAwesomeIcon icon={faLeaf} /> &nbsp;Balcony:{" "}
+            {props.balcony ? "Yes" : "No"}
+          </Balcony>
+          <Price>
+            <FontAwesomeIcon icon={faDollarSign} /> &nbsp; Price: ${props.price}
+            /month
+          </Price>
+          <Pet>
+            <FontAwesomeIcon icon={faPaw} /> &nbsp;Pet:{" "}
+            {props.pet === false ? "No" : "Yes"}
+          </Pet>
+          <Parking>
+            <FontAwesomeIcon icon={faParking} /> &nbsp;Parking:{" "}
+            {props.parking ? "Yes" : "No"}
+          </Parking>
           <Link to={`/apartments/${props.id}`}>
             <Button>See Availability</Button>
           </Link>

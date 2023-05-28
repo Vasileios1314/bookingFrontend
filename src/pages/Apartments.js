@@ -14,7 +14,6 @@ export function Apartments({ onRouteChange }) {
   const [filter, setFilter] = useState({
     balcony: "Select All",
     bedroom: "Select All",
-    maxPeople: "Select All",
     parking: "Select All",
     pet: "Select All",
     ratingRange: "5",
@@ -47,14 +46,6 @@ export function Apartments({ onRouteChange }) {
         return false;
       }
 
-      // Filter based on maxPeople
-      if (
-        filter.maxPeople !== "Select All" &&
-        apartment.maxPeople !== parseInt(filter.maxPeople)
-      ) {
-        return false;
-      }
-
       // Filter based on parking
       if (
         filter.parking !== "Select All" &&
@@ -69,7 +60,7 @@ export function Apartments({ onRouteChange }) {
       }
 
       // Filter based on rating range
-      if (filter.ratingRange !== "Select All") {
+      if (filter.ratingRange !== "5") {
         const minRating = parseInt(filter.ratingRange);
         const averageRating =
           apartment.ratings.reduce((sum, rating) => sum + rating.rating, 0) /
@@ -110,11 +101,6 @@ export function Apartments({ onRouteChange }) {
     });
   };
 
-  if (filteredApartments.length === 0) {
-    console.log("first", filteredApartments.length);
-  } else {
-    console.log("second", filteredApartments.length);
-  }
   return (
     <OutterContainer>
       <Hero

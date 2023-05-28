@@ -8,11 +8,13 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
+import { faCopyright, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 export function Footer({ homePage }) {
   return (
     <FooterContainer homePage={homePage}>
       <SocialIcons>
+        <FontAwesomeIcon icon={faPaperPlane} />
         <p>Follow Us</p>
         <a
           href="https://www.facebook.com/"
@@ -48,7 +50,8 @@ export function Footer({ homePage }) {
         <Link to={"/about"}>About Us</Link>
       </Links>
       <FooterText>
-        &copy; {new Date().getFullYear()} All rights reserved
+        <FontAwesomeIcon icon={faCopyright} /> &nbsp; {new Date().getFullYear()}{" "}
+        All rights reserved
       </FooterText>
     </FooterContainer>
   );
