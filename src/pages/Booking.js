@@ -3,32 +3,40 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { apartmentId } from "../store/apartment/thunks";
 import { selectApartment } from "../store/apartment/selectors";
+import { selectToken, selectUser } from "../store/user/selectors";
 import styled from "styled-components";
 import { Stars, Comments, BookingCalendar } from "../components";
 import ReactImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBed,
   faBookOpen,
+  faCheck,
+  faFan,
   faLeaf,
   faMapMarker,
   faPaw,
   faPeopleGroup,
   faPeopleRoof,
+  faToilet,
   faWifi,
+  faToiletPaper,
+  faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function Booking({ onRouteChange }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const apartment = useSelector(selectApartment);
+  const token = useSelector(selectToken);
+  // const user = useSelector(selectUser);
 
   try {
     useEffect(() => {
       dispatch(apartmentId(id));
       onRouteChange(true);
     }, []);
-    console.log("selectApartmentById", apartment);
 
     return (
       <ApartmentContainer key={apartment.id}>
@@ -44,7 +52,7 @@ export function Booking({ onRouteChange }) {
           <Rating>
             <Stars
               rating={apartment?.ratings}
-              edit={true}
+              edit={token !== null ? true : false}
               isHalf={false}
               size={window.innerWidth <= 480 ? 20 : 30}
             />
@@ -75,7 +83,19 @@ export function Booking({ onRouteChange }) {
           <DescriptionContainer>
             <DescriptionTitle>Amenities</DescriptionTitle>
             <DescriptionText>
+              <FontAwesomeIcon icon={faFan} /> &nbsp; Air conditioning: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faBed} /> &nbsp; Large double bed
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faToiletPaper} /> &nbsp; toilet paper
+            </DescriptionText>
+            <DescriptionText>
               <FontAwesomeIcon icon={faWifi} /> &nbsp; Wifi: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faToilet} /> &nbsp; WC: Yes
             </DescriptionText>
             <DescriptionText>
               <FontAwesomeIcon icon={faPeopleGroup} /> &nbsp; Max capacity:{" "}
@@ -93,10 +113,28 @@ export function Booking({ onRouteChange }) {
               <FontAwesomeIcon icon={faPeopleRoof} /> &nbsp; Number of Bedrooms:{" "}
               {apartment.bedroom}
             </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faCheck} /> &nbsp; Sound insulation: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faCheck} /> &nbsp; Bed linen: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faCheck} /> &nbsp; Towels: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faCheck} /> &nbsp; Hairdryer: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faCheck} /> &nbsp; Wardrobe: Yes
+            </DescriptionText>
           </DescriptionContainer>
         </DescriptionAmenitiesContainer>
         <CommentsContainer>
-          <BookingCalendar availabilities={apartment?.availabilities} />
+          <BookingCalendar
+            availabilities={apartment?.availabilities}
+            apartmentId={apartment.id}
+          />
         </CommentsContainer>
         <CommentsContainer>
           <Comments comments={apartment?.comments} />
@@ -104,7 +142,7 @@ export function Booking({ onRouteChange }) {
       </ApartmentContainer>
     );
   } catch (error) {
-    console.log(error); // Log the specific error
+    // console.log(error); // Log the specific error
   }
 }
 

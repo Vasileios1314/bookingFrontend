@@ -8,6 +8,7 @@ import {
   About,
   Apartments,
   Booking,
+  CheckOut,
   Contact,
   Homepage,
   Login,
@@ -50,6 +51,10 @@ function App() {
         <Route
           path="/apartments/:id"
           element={<Booking onRouteChange={setHomePage} />}
+        />
+        <Route
+          path="/checkOut/:id"
+          element={<CheckOut onRouteChange={setHomePage} />}
         />
       </Routes>
       <Footer homePage={homePage} />

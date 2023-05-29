@@ -4,6 +4,7 @@ import ReactStars from "react-rating-stars-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { postRatingAction } from "../store/apartment/thunks";
 
 // Styled component for the container div
 const StarsContainer = styled.div`
@@ -32,8 +33,7 @@ export const Stars = (props) => {
     isHalf: props.isHalf,
     edit: props.edit,
     onChange: (newValue) => {
-      // dispatch(ThunkAction(newValue));
-      console.log(`Example 3: new value is ${newValue}`);
+      dispatch(postRatingAction(newValue));
     },
   };
 
@@ -43,7 +43,7 @@ export const Stars = (props) => {
         <div className="col text-center">
           <StarsContainer>
             <ReactStars {...firstExample} />
-            {averageRating}
+            {averageRating.toFixed(1)}
             <StyledIcon icon={faThumbsUp} />
           </StarsContainer>
         </div>

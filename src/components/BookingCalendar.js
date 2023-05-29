@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectToken, selectUser } from "../store/user/selectors";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-export function BookingCalendar({ availabilities }) {
+export function BookingCalendar({ availabilities, apartmentId }) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const token = useSelector(selectToken);
+  // const user = useSelector(selectUser);
+  const navigate = useNavigate();
 
   const handleStartDateChange = (date) => {
     setSelectedStartDate(date);
@@ -40,9 +47,14 @@ export function BookingCalendar({ availabilities }) {
   };
 
   const handleBooking = () => {
-    if (selectedStartDate && selectedEndDate) {
-      // Perform booking logic here
+    if (selectedStartDate && selectedEndDate && token) {
+      const selectedDays = [selectedStartDate, selectedEndDate]; // Array to store the selected days
+
       setFeedbackMessage("Booking successful!"); // Set success message
+      navigate(`/checkOut/${apartmentId}`, { state: { selectedDays } }); // Navigate to the checkout page and pass the selectedDays array as a location state
+    } else if (token == null) {
+      setIsButtonDisabled(true);
+      setFeedbackMessage("Please Login!!"); // Set error message
     } else {
       setFeedbackMessage("Please select both start and end dates."); // Set error message
     }
@@ -68,8 +80,19 @@ export function BookingCalendar({ availabilities }) {
           }
         />
       </CalendarWrapper>
-      <FeedbackMessage>{feedbackMessage}</FeedbackMessage>
-      <BookButton onClick={handleBooking}>Book Now</BookButton>
+      {token !== null ? (
+        <>
+          <FeedbackMessage>{feedbackMessage}</FeedbackMessage>
+          <BookButton onClick={handleBooking}>Book Now</BookButton>
+        </>
+      ) : (
+        <>
+          <FeedbackMessage>{feedbackMessage}</FeedbackMessage>
+          <BookButton onClick={handleBooking} disabled={isButtonDisabled}>
+            Book Now
+          </BookButton>
+        </>
+      )}
     </CalendarContainer>
   );
 }
@@ -120,5 +143,10 @@ const BookButton = styled.button`
     background-color: white;
     color: #4caf50;
     border: 2px solid #4caf50;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
   }
 `;

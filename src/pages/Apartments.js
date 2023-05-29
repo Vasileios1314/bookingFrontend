@@ -79,7 +79,7 @@ export function Apartments({ onRouteChange }) {
   const ApartmentList = ({ apartments }) => {
     return apartments.map((item) => {
       return (
-        <Container>
+        <Container key={item.id}>
           <ApartmentCard
             id={item.id}
             availabilities={item.availabilities}

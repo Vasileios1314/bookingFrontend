@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectToken, selectUser } from "../store/user/selectors";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 import Flag from "react-world-flags";
@@ -8,10 +9,13 @@ import { formatDistanceToNow } from "date-fns";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
+import { postCommentAction } from "../store/apartment/thunks";
 
 export const Comments = (props) => {
   const dispatch = useDispatch();
   const [newComment, setNewComment] = useState("");
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -19,10 +23,19 @@ export const Comments = (props) => {
 
   const handleCommentSubmit = (event) => {
     event.preventDefault();
+    const trimmedComment = newComment.trim();
+    if (trimmedComment === "") {
+      return; // Input is empty or contains only spaces
+    }
+
+    dispatch(postCommentAction(newComment));
     setNewComment("");
   };
 
   const formatDate = (date) => {
+    if (!date) {
+      return ""; // Handle null or undefined date value
+    }
     return formatDistanceToNow(new Date(date), { addSuffix: true });
   };
 
@@ -34,20 +47,26 @@ export const Comments = (props) => {
             <Carousel.Item key={index} className="d-block w-100">
               <CommentItem>
                 <UserInfo>
-                  {comment.user.image ? (
+                  {comment.user?.image ? (
                     <UserImage
-                      src={comment.user.image}
-                      alt={comment.user.name}
+                      src={comment.user?.image}
+                      alt={comment.user?.name}
                     />
                   ) : (
                     <UserAvatar>
-                      <Avatar name={comment.user.name} size={40} round={true} />
+                      <Avatar
+                        name={
+                          comment.user?.name ? comment.user?.name : user.name
+                        }
+                        size={40}
+                        round={true}
+                      />
                     </UserAvatar>
                   )}
-                  <UserName>{comment.user.name}</UserName>
+                  <UserName>{comment.user?.name}</UserName>
                   <UserCountry>
                     <Flag
-                      code={comment.user.country}
+                      code={comment.user?.country}
                       style={{
                         width: "24px",
                         height: "16px",
@@ -64,16 +83,18 @@ export const Comments = (props) => {
             </Carousel.Item>
           ))}
       </Carousel>
-      <CommentForm onSubmit={handleCommentSubmit}>
-        <CommentInput
-          placeholder="Enter your comment"
-          value={newComment}
-          onChange={handleCommentChange}
-        />
-        <CommentButton type="submit">
-          <FontAwesomeIcon icon={faComment} /> &nbsp;Add Comment
-        </CommentButton>
-      </CommentForm>
+      {token !== null && (
+        <CommentForm onSubmit={handleCommentSubmit}>
+          <CommentInput
+            placeholder="Enter your comment"
+            value={newComment}
+            onChange={handleCommentChange}
+          />
+          <CommentButton type="submit">
+            <FontAwesomeIcon icon={faComment} /> &nbsp;Add Comment
+          </CommentButton>
+        </CommentForm>
+      )}
     </CommentContainer>
   );
 };

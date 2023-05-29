@@ -15,8 +15,23 @@ export const apartmentSlice = createSlice({
     fetchApartmentById: (state, action) => {
       state.apartmentById = action.payload.apartmentById;
     },
+    addRating: (state, action) => {
+      const { apartmentId, rating } = action.payload;
+      state.apartmentById = {
+        ...state.apartmentById,
+        ratings: [...state.apartmentById.ratings, { apartmentId, rating }],
+      };
+    },
+    addComment: (state, action) => {
+      const { apartmentId, comment } = action.payload;
+      state.apartmentById = {
+        ...state.apartmentById,
+        comments: [...state.apartmentById.comments, { apartmentId, comment }],
+      };
+    },
   },
 });
-export const { fetchApartments, fetchApartmentById } = apartmentSlice.actions;
+export const { fetchApartments, fetchApartmentById, addRating, addComment } =
+  apartmentSlice.actions;
 
 export default apartmentSlice.reducer;
