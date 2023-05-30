@@ -22,7 +22,6 @@ import {
   faToilet,
   faWifi,
   faToiletPaper,
-  faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function Booking({ onRouteChange }) {
@@ -127,6 +126,9 @@ export function Booking({ onRouteChange }) {
             </DescriptionText>
             <DescriptionText>
               <FontAwesomeIcon icon={faCheck} /> &nbsp; Wardrobe: Yes
+            </DescriptionText>
+            <DescriptionText>
+              <FontAwesomeIcon icon={faCheck} /> &nbsp; Shower: Yes
             </DescriptionText>
           </DescriptionContainer>
         </DescriptionAmenitiesContainer>

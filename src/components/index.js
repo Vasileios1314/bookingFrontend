@@ -11,3 +11,5 @@ export * from "./Stars";
 export * from "./Filters";
 export * from "./Comments";
 export * from "./BookingCalendar";
+export * from "./UserProfileMenu";
+export * from "./UserInfo";

@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectToken } from "../store/user/selectors";
-import { logOut } from "../store/user/slice";
+import { selectToken, selectUser } from "../store/user/selectors";
 import { Link } from "react-router-dom";
 import { logo } from "../assets";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Avatar from "react-avatar";
 import {
   faTimes,
-  faSignOut,
   faSignIn,
   faHouse,
   faMeteor,
@@ -18,9 +17,8 @@ import {
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
 
-  const dispatch = useDispatch();
-
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   return (
     <Nav>
@@ -51,7 +49,37 @@ export const Navigation = () => {
           {" "}
           <FontAwesomeIcon icon={faHandshake} /> &nbsp; About us
         </MenuLink>
-        {token ? (
+        {token && (
+          <>
+            {user?.image ? (
+              <MenuLink to="/profile">
+                <UserImage
+                  src={user?.image}
+                  alt={user?.name}
+                  title="My Profile"
+                />
+              </MenuLink>
+            ) : (
+              <MenuLink to="/profile">
+                <UserAvatar>
+                  <Avatar
+                    title="My Profile"
+                    name={user?.name ? user?.name : "Profile"}
+                    size={40}
+                    round={true}
+                  />
+                </UserAvatar>
+              </MenuLink>
+            )}
+          </>
+        )}
+        {!token && (
+          <MenuLink to="/login">
+            <FontAwesomeIcon icon={faSignIn} />
+            Login
+          </MenuLink>
+        )}
+        {/* {token ? (
           <MenuLink as="div" onClick={() => dispatch(logOut())}>
             <FontAwesomeIcon icon={faSignOut} />
             Logout
@@ -61,7 +89,7 @@ export const Navigation = () => {
             <FontAwesomeIcon icon={faSignIn} />
             Login
           </MenuLink>
-        )}
+        )} */}
       </Menu>
     </Nav>
   );
@@ -147,4 +175,24 @@ const Menu = styled.div`
     max-height: ${({ open }) => (open ? "300px" : "0")};
     transition: max-height 0.3s ease-in;
   }
+`;
+
+const UserImage = styled.img`
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+`;
+
+const UserAvatar = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #666;
+  border-radius: 50%;
 `;

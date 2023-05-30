@@ -12,6 +12,7 @@ import {
   Contact,
   Homepage,
   Login,
+  Profile,
   SignUp,
 } from "./pages";
 import { Discover } from "./pages/Discover";
@@ -55,6 +56,10 @@ function App() {
         <Route
           path="/checkOut/:id"
           element={<CheckOut onRouteChange={setHomePage} />}
+        />
+        <Route
+          path="/profile"
+          element={<Profile onRouteChange={setHomePage} />}
         />
       </Routes>
       <Footer homePage={homePage} />
