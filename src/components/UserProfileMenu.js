@@ -7,10 +7,16 @@ import {
   faCreditCard,
   faShield,
   faUser,
+  faSignOut,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { logOut } from "../store/user/slice";
+import { selectUser } from "../store/user/selectors";
 
 export function UserProfileMenu({ selectedMenuItem, onMenuItemClick }) {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
   const handleMenuItemClick = (menuItem) => {
     onMenuItemClick(menuItem);
   };
@@ -18,54 +24,46 @@ export function UserProfileMenu({ selectedMenuItem, onMenuItemClick }) {
   return (
     <MenuContainer>
       <Menu>
-        <MenuItem>
-          <Link
-            // to="/mysettings/personal?aid=2311236"
-            style={{ textDecoration: "none" }}
-            onClick={() => handleMenuItemClick("personal")}
-          >
+        <MenuItem onClick={() => handleMenuItemClick("personal")}>
+          <Link style={{ textDecoration: "none" }}>
             <MenuTitle>
               {" "}
               <FontAwesomeIcon icon={faUser} /> &nbsp; Personal details
             </MenuTitle>
           </Link>
         </MenuItem>
-        <MenuItem>
-          <Link
-            // to="/mysettings/personal?aid=2311236"
-            style={{ textDecoration: "none" }}
-            onClick={() => handleMenuItemClick("security")}
-          >
+        <MenuItem onClick={() => handleMenuItemClick("security")}>
+          <Link style={{ textDecoration: "none" }}>
             <MenuTitle>
               {" "}
               <FontAwesomeIcon icon={faShield} /> &nbsp; Security
             </MenuTitle>
           </Link>
         </MenuItem>
-        <MenuItem>
-          <Link
-            // to="/mysettings/personal?aid=2311236"
-            style={{ textDecoration: "none" }}
-            onClick={() => handleMenuItemClick("payment")}
-          >
+        <MenuItem onClick={() => handleMenuItemClick("payment")}>
+          <Link style={{ textDecoration: "none" }}>
             <MenuTitle>
               {" "}
               <FontAwesomeIcon icon={faCreditCard} /> &nbsp; Payment details
             </MenuTitle>
           </Link>
         </MenuItem>
-        <MenuItem>
-          <Link
-            // to="/mysettings/personal?aid=2311236"
-            style={{ textDecoration: "none" }}
-            onClick={() => handleMenuItemClick("reservations")}
-          >
+        <MenuItem onClick={() => handleMenuItemClick("reservations")}>
+          <Link style={{ textDecoration: "none" }}>
             <MenuTitle>
               {" "}
               <FontAwesomeIcon icon={faBookmark} /> &nbsp; Reservations
             </MenuTitle>
           </Link>
         </MenuItem>
+        <Link to={`/`} style={{ textDecoration: "none" }}>
+          <MenuItem onClick={() => dispatch(logOut())}>
+            <MenuTitle>
+              {" "}
+              <FontAwesomeIcon icon={faSignOut} /> &nbsp; Log Out
+            </MenuTitle>
+          </MenuItem>
+        </Link>
       </Menu>
     </MenuContainer>
   );

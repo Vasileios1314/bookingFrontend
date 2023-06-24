@@ -65,7 +65,7 @@ export const postRatingAction = (newValue) => {
     const token = selectToken(getState());
     const { id } = selectUser(getState());
     const { id: apartmentId } = selectApartment(getState());
-    console.log("newValue", id);
+
     dispatch(appLoading());
     try {
       const response = await axios.post(

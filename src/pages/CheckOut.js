@@ -14,7 +14,6 @@ export function CheckOut({ onRouteChange }) {
     <div>
       <h2>CheckOut</h2>
       <p>Selected Days: {selectedDays.join(", ")}</p>
-      {/* Render the rest of your checkout page */}
     </div>
   );
 }

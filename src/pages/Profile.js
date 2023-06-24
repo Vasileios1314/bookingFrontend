@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken, selectUser } from "../store/user/selectors";
-import { logOut } from "../store/user/slice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { UserProfileMenu, UserInfo } from "../components";
 
 export function Profile({ onRouteChange }) {
